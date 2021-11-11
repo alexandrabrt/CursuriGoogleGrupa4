@@ -11,9 +11,9 @@ for item in word:
         word_list.append('_')
     else:
         word_list.append(item.lower())
-        # if item in unique_letter:
-        #     unique_letter.remove(item)
-word_length = len(unique_letter) - 2
+        if item in unique_letter:
+            unique_letter.remove(item)
+word_length = len(unique_letter)
 print(" ".join(word_list))
 count_nr = 1
 list_already_checked = []
