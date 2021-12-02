@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from aplicatie1.models import Location
 
@@ -33,3 +34,11 @@ class Companies(models.Model):
 
     def __str__(self):
         return f"{self.company_type} {self.name}"
+
+
+class UserExtend(User):
+
+    customer = models.ForeignKey(Companies, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} {self.customer.name}"
