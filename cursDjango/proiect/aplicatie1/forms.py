@@ -13,13 +13,13 @@ class LocationForm(forms.ModelForm):
         self.pk = pk
 
     def clean(self):
-        cleaned_data = self.cleaned_data
-        city_value = cleaned_data.get('city')
-        country_value = cleaned_data.get('country')
+        # cleaned_data = self.cleaned_data.get('city')
+        city_value = self.cleaned_data.get('city')
+        country_value = self.cleaned_data.get('country')
         if self.pk:
             if Location.objects.filter(city__icontains=city_value, country__icontains=country_value, active=1).exclude(id=self.pk).exists():
                 self._errors['city'] = self.error_class(["Orasul si tara deja exista"])
         else:
             if Location.objects.filter(city__icontains=city_value, country__icontains=country_value, active=1).exists():
                 self._errors['city'] = self.error_class(["Orasul si tara deja exista"])
-        return cleaned_data
+        return self.cleaned_data
